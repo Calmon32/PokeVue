@@ -1,4 +1,4 @@
-# vue-2
+# PokeVue
 
 ## Project setup
 ```
