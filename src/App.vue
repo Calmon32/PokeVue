@@ -21,22 +21,52 @@ export default {
     data: () => {
         return {
             isLoading: false,
-            pokemon: []
+            pokemon: [],
+            offset: 0
         };
     },
-    created() {
-        this.fetchPokemon();
+    mounted() {
+        this.FetchPokemon();
+        this.LoadOnScroll();
     },
     methods: {
-        async fetchPokemon() {
-            this.isLoading = true;
-            const { data } = await PokemonRepository.get(0, 500);
-            this.isLoading = false;
-            this.pokemon = data.results.map(pokemon => {
-                pokemon.id = pokemon.url.split("/").slice(-2)[0];
-                pokemon.imageURL = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`;
-                return pokemon;
-            });
+        async FetchPokemon() {
+            if (!this.isLoading) {
+                this.isLoading = true;
+                const { data } = await PokemonRepository.get(this.offset, 20);
+                this.offset += data.results.length;
+                let newPokemon = data.results.map(pokemon => {
+                    pokemon.id = pokemon.url.split("/").slice(-2)[0];
+
+                    let words = pokemon.name.split('-');
+                    for (var i = 0; i < words.length; i++) {
+                        words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1);
+                    }
+                    pokemon.name = words.join(' ')
+                    
+                    pokemon.imageURL = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`;
+                    return pokemon;
+                });
+                this.pokemon = [...this.pokemon, ...newPokemon];
+                this.isLoading = false;
+            }
+        },
+        LoadOnScroll() {
+            // Credit to: https://renatello.com/check-if-a-user-has-scrolled-to-the-bottom-in-vue-js/
+            window.onscroll = () => {
+                let bottomOfWindow =
+                    Math.max(
+                        window.pageYOffset,
+                        document.documentElement.scrollTop,
+                        document.body.scrollTop
+                    ) +
+                        window.innerHeight >
+                    document.documentElement.offsetHeight - 500;
+
+                if (bottomOfWindow) {
+                    this.FetchPokemon();
+                }
+            };
         }
     }
 };
