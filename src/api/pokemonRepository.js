@@ -1,3 +1,6 @@
+
+// PokemonRepository.js
+
 import Repository from "./Repository.js"
 
 const resource = "/pokemon"

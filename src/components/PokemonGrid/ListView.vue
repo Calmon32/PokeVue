@@ -1,9 +1,10 @@
+
+// ListView.vue
+
 <template>
     <div>
         <div id="grid-container">
-            <div v-for="(pokemon, index) in pokemonList" v-bind:key="index">
-                <ListElement v-bind:pokemon="pokemon" />
-            </div>
+            <ListElement v-for="(pokemon, index) in pokemonList" v-bind:key="index" :pokemon="pokemon" :select="select" />
         </div>
     </div>
 </template>
@@ -14,7 +15,8 @@ import ListElement from "./ListElement.vue";
 export default {
     name: "ListView",
     props: {
-        pokemonList: Array
+        pokemonList: Array,
+        select: Function
     },
     components: {
         ListElement
