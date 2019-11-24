@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>TEST PAGE</h1>
-    <router-link to="/">back</router-link>
+    <router-link to="/" class="btn btn-light">Back</router-link>
   </div>
   
 </template>
