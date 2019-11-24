@@ -38,7 +38,7 @@ a {
 }
 
 .pokeImg {
-    height: 100%;
+    height: 96px;
     margin: auto;
 }
 
