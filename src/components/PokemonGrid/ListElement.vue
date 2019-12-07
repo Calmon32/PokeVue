@@ -4,7 +4,8 @@
 <template>
     <div @click="select(pokemon.id)" class="card bg-light text-center">
         <div class="card-header">
-            <img class="pokeImg" :src="pokemon.imageURL" alt />
+            <img v-show="loaded" class="pokeImg" :src="pokemon.imageURL" alt @load="loaded = true" />
+            <img v-if="!loaded" class="pokeball" src="pokeball.png" alt />
         </div>
         <div class="card-body">
             <h5 class="card-title">{{ pokemon.name }}</h5>
@@ -18,6 +19,11 @@ export default {
     props: {
         pokemon: Object,
         select: Function
+    },
+    data: function () {
+        return {
+            loaded: false
+        }
     }
 };
 </script>
@@ -40,6 +46,12 @@ a {
 .pokeImg {
     height: 96px;
     margin: auto;
+}
+
+.pokeball {
+    height: 96px;
+    margin: auto;
+    padding: 36px;
 }
 
 .card-header {

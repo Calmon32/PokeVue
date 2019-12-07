@@ -77,7 +77,7 @@ export default {
                         document.body.scrollTop
                     ) +
                         window.innerHeight >
-                    document.documentElement.offsetHeight - 500;
+                    document.documentElement.offsetHeight - 1000;
 
                 if (bottomOfWindow) {
                     this.FetchPokemon();
