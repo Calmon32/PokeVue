@@ -38,11 +38,10 @@ export default {
     },
     computed: {
         currentProps: function() {
-            if (this.currentComponent === 'ListView') {
-                return { pokemonList: this.pokemon, select: this.SelectPokemon }
-            } 
-            else if (this.currentComponent === 'PokemonView') {
+            if (this.currentComponent === 'PokemonView') {
                 return { pokemon: this.selectedPokemon, deselect: this.DeselectPokemon }
+            } else {
+                return { pokemonList: this.pokemon, select: this.SelectPokemon }
             }
         }
     },
@@ -78,7 +77,7 @@ export default {
                         document.body.scrollTop
                     ) +
                         window.innerHeight >
-                    document.documentElement.offsetHeight - 500;
+                    document.documentElement.offsetHeight - 1000;
 
                 if (bottomOfWindow) {
                     this.FetchPokemon();

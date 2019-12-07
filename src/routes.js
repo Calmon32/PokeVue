@@ -3,5 +3,6 @@ import Test from './components/Test.vue'
 
 export const routes = [
     { path: '', component: PokemonGrid },
-    { path: '/test', component: Test }
+    { path: '/test/:id', component: Test, props: true },
+    { path: '*', redirect: '/'}
 ];
