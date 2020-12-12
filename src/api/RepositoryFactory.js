@@ -1,7 +1,7 @@
 
 // RepositoryFactory.js
 
-import PokemonRepository from "./PokemonRepository.js"
+import PokemonRepository from "./pokemonRepository.js"
 
 const repositories = {
     pokemon: PokemonRepository
